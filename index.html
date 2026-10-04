@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStock</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>TechStock</h1>
+    <p class="app-count">3 elemente, dintre care 2 active</p>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Adaugă produs</h2>
+      <form class="item-form">
+        <label>
+          Denumire produs
+          <input type="text" name="titlu" placeholder="Ex: Încărcător Fast Charge 25W" required />
+        </label>
+        
+        <label>
+          Condiție produs
+          <select name="eticheta">
+            <option value="nou">Nou</option>
+            <option value="refurbished">Refurbished</option>
+            <option value="service">Service/Piese</option>
+          </select>
+        </label>
+        
+        <button type="submit">Adaugă</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Inventar curent</h2>
+      <!-- Când lista e goală: <p class="empty">Nu există niciun element.</p> -->
+      <ul class="item-list">
+        <li class="item-card">
+          <div class="card-info">
+            <h3>Încărcător Fast Charge 25W</h3>
+            <span class="badge badge-nou">Nou</span>
+          </div>
+          <span class="status">În stoc</span>
+        </li>
+
+        <li class="item-card done">
+          <div class="card-info">
+            <h3>Display OLED Galaxy S21</h3>
+            <span class="badge badge-service">Service/Piese</span>
+          </div>
+          <span class="status">Epuizat</span>
+        </li>
+
+        <li class="item-card">
+          <div class="card-info">
+            <h3>Husă Silicon iPhone 15 Pro</h3>
+            <span class="badge badge-refurbished">Refurbished</span>
+          </div>
+          <span class="status">În stoc</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    Proiect Tehnologii Web
+  </footer>
+</body>
+</html>

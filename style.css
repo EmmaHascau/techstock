@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b1120;
+  --card: #131d33;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #1e2e4f;
+
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+
+  --badge-nou-bg: #064e3b;
+  --badge-nou-txt: #6ee7b7;
+  --badge-refurbished-bg: #451a03;
+  --badge-refurbished-txt: #fcd34d;
+  --badge-service-bg: #3b0764;
+  --badge-service-txt: #d8b4fe;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.app-header {
+  background: #080d19;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.app-count {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: #0f172a;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 36px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.panel h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.item-form input,
+.item-form select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0b1120;
+  color: #ffffff;
+  font-size: 0.92rem;
+}
+
+.item-form input:focus,
+.item-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.item-form button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 11px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.item-form button:hover {
+  background: var(--accent-hover);
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #0f172a;
+}
+
+.item-card:hover {
+  border-color: #334e80;
+}
+
+.card-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.badge-nou {
+  background: var(--badge-nou-bg);
+  color: var(--badge-nou-txt);
+}
+
+.badge-refurbished {
+  background: var(--badge-refurbished-bg);
+  color: var(--badge-refurbished-txt);
+}
+
+.badge-service {
+  background: var(--badge-service-bg);
+  color: var(--badge-service-txt);
+}
+
+.status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item-card.done {
+  opacity: 0.55;
+}
+
+.item-card.done h3 {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #070c17;
+    --card: #0f172a;
+    --border: #1a2742;
+  }
+
+  .app-header {
+    background: #050810;
+  }
+
+  .item-card {
+    background: #0b1220;
+  }
+}
+
+.app-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
