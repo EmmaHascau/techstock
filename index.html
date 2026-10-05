@@ -2,71 +2,133 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechStock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechStock - mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="app-header">
-    <h1>TechStock</h1>
-    <p class="app-count">3 elemente, dintre care 2 active</p>
+    <svg class="brand-icon" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+      <rect x="16" y="16" width="32" height="32" rx="4" />
+      <rect x="26" y="26" width="12" height="12" rx="2" />
+      <path d="M24 6v10M32 6v10M40 6v10M24 48v10M32 48v10M40 48v10M6 24h10M6 32h10M6 40h10M48 24h10M48 32h10M48 40h10" />
+    </svg>
+    <h1>Tech<span class="outline">Stock</span></h1>
+    <p class="tagline">Stocul magazinului de telefoane: ce e pe raft, ce a plecat și ce trebuie comandat.</p>
+    <p class="app-count">3 produse, dintre care 2 în stoc</p>
+
+    <svg class="header-trace" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
+      <path class="trace-faint" d="M0 36H300L324 26H640L664 36H900L924 24H1200" />
+      <path d="M0 30H220L244 18H520L544 30H760L784 12H1000L1024 30H1200" />
+    </svg>
   </header>
 
   <main class="container">
-    <section class="panel">
-      <h2>Adaugă produs</h2>
+    <section class="panel" aria-labelledby="titlu-formular">
+      <h2 id="titlu-formular">Adaugă produs</h2>
+      <p class="panel-hint">Completează fișa și produsul intră în inventar.</p>
+
       <form class="item-form">
-        <label>
-          Denumire produs
-          <input type="text" name="titlu" placeholder="Ex: Încărcător Fast Charge 25W" required />
+        <label>Denumire produs
+          <input type="text" name="denumire" maxlength="100" placeholder="Ex: Încărcător Fast Charge 25W" required />
         </label>
-        
-        <label>
-          Condiție produs
-          <select name="eticheta">
+
+        <label>Condiție produs
+          <select name="conditie">
             <option value="nou">Nou</option>
             <option value="refurbished">Refurbished</option>
             <option value="service">Service/Piese</option>
           </select>
         </label>
-        
-        <button type="submit">Adaugă</button>
+
+        <div class="form-row">
+          <label>Preț (lei)
+            <input type="number" name="pret" min="0" placeholder="89" />
+          </label>
+          <label>Bucăți
+            <input type="number" name="cantitate" min="0" placeholder="12" />
+          </label>
+        </div>
+
+        <label>Categorie
+          <select name="categorie">
+            <option value="accesorii">Accesorii</option>
+            <option value="piese">Piese</option>
+            <option value="telefoane">Telefoane</option>
+          </select>
+        </label>
+
+        <button type="submit">Adaugă în inventar</button>
       </form>
     </section>
 
-    <section class="panel">
-      <h2>Inventar curent</h2>
-      <!-- Când lista e goală: <p class="empty">Nu există niciun element.</p> -->
+    <section class="panel" aria-labelledby="titlu-lista">
+      <h2 id="titlu-lista">Inventar curent</h2>
+      <p class="panel-hint">Fiecare produs are eticheta lui, cu prețul și stocul pe partea detașabilă.</p>
+
+      <p class="empty" hidden>Inventarul e gol. Adaugă primul produs din formular.</p>
+
       <ul class="item-list">
         <li class="item-card">
           <div class="card-info">
             <h3>Încărcător Fast Charge 25W</h3>
-            <span class="badge badge-nou">Nou</span>
+            <div class="card-meta">
+              <span class="badge badge-nou">Nou</span>
+              <span class="meta-text">Cod ACC-0142</span>
+              <span class="meta-text">Accesorii</span>
+            </div>
+            <p class="card-desc">Încărcător rapid USB-C, potrivit pentru majoritatea telefoanelor Android și iPhone.</p>
+            <p class="card-note">Locație: raft B2</p>
           </div>
-          <span class="status">În stoc</span>
+          <div class="card-side">
+            <span class="price">89 lei</span>
+            <span class="status status-ok">În stoc</span>
+            <span class="qty">24 buc.</span>
+          </div>
         </li>
 
         <li class="item-card done">
           <div class="card-info">
             <h3>Display OLED Galaxy S21</h3>
-            <span class="badge badge-service">Service/Piese</span>
+            <div class="card-meta">
+              <span class="badge badge-service">Service/Piese</span>
+              <span class="meta-text">Cod PIE-0317</span>
+              <span class="meta-text">Piese</span>
+            </div>
+            <p class="card-desc">Ecran de schimb pentru Galaxy S21, testat înainte de montaj. Se comandă din nou.</p>
+            <p class="card-note">Locație: raft D1</p>
           </div>
-          <span class="status">Epuizat</span>
+          <div class="card-side">
+            <span class="price">649 lei</span>
+            <span class="status status-out">Epuizat</span>
+            <span class="qty">0 buc.</span>
+          </div>
         </li>
 
         <li class="item-card">
           <div class="card-info">
             <h3>Husă Silicon iPhone 15 Pro</h3>
-            <span class="badge badge-refurbished">Refurbished</span>
+            <div class="card-meta">
+              <span class="badge badge-refurbished">Refurbished</span>
+              <span class="meta-text">Cod ACC-0208</span>
+              <span class="meta-text">Accesorii</span>
+            </div>
+            <p class="card-desc">Husă flexibilă din silicon, verificată și igienizată înainte de a reveni pe raft.</p>
+            <p class="card-note">Locație: raft B4</p>
           </div>
-          <span class="status">În stoc</span>
+          <div class="card-side">
+            <span class="price">39 lei</span>
+            <span class="status status-ok">În stoc</span>
+            <span class="qty">3 buc.</span>
+          </div>
         </li>
       </ul>
     </section>
   </main>
 
-  <footer class="app-footer">
-    Proiect Tehnologii Web
-  </footer>
+  <footer class="app-footer">Proiect Tehnologii Web</footer>
 </body>
 </html>
