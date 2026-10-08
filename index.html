@@ -20,20 +20,21 @@
     <p class="tagline">Stocul magazinului de telefoane: ce e pe raft, ce a plecat și ce trebuie comandat.</p>
     <p class="app-count">3 produse, dintre care 2 în stoc</p>
 
-    <svg class="header-trace" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
-      <path class="trace-faint" d="M0 36H300L324 26H640L664 36H900L924 24H1200" />
-      <path d="M0 30H220L244 18H520L544 30H760L784 12H1000L1024 30H1200" />
+    <svg class="header-trace" width="2400" height="40" viewBox="0 0 2400 40" aria-hidden="true">
+      <path class="trace-faint" d="M0 36 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32 h200 l24 -10 h120 l24 10 h32" />
+      <path class="trace-line" d="M0 30 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102" />
+      <path class="trace-pulse" pathLength="1000" d="M0 30 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102 h110 l24 -12 h140 l24 12 h102" />
     </svg>
   </header>
 
   <main class="container">
-    <section class="panel" aria-labelledby="titlu-formular">
+    <section class="panel panel-form" aria-labelledby="titlu-formular">
       <h2 id="titlu-formular">Adaugă produs</h2>
       <p class="panel-hint">Completează fișa și produsul intră în inventar.</p>
 
       <form class="item-form">
         <label>Denumire produs
-          <input type="text" name="denumire" maxlength="100" placeholder="Ex: Încărcător Fast Charge 25W" required />
+          <input type="text" name="denumire" maxlength="100" placeholder="Ex: Încărcător Fast Charge 25W" />
         </label>
 
         <label>Condiție produs
@@ -65,64 +66,73 @@
       </form>
     </section>
 
-    <section class="panel" aria-labelledby="titlu-lista">
+    <section class="panel panel-list" aria-labelledby="titlu-lista">
       <h2 id="titlu-lista">Inventar curent</h2>
-      <p class="panel-hint">Fiecare produs are eticheta lui, cu prețul și stocul pe partea detașabilă.</p>
+      <p class="panel-hint">Fiecare produs are eticheta lui, cu prețul și nivelul de stoc ca barele de semnal ale unui telefon.</p>
 
-      <p class="empty" hidden>Inventarul e gol. Adaugă primul produs din formular.</p>
-
+      <!-- Când lista e goală: <p class="empty">Nu există niciun produs în stoc.</p> -->
+      
       <ul class="item-list">
         <li class="item-card">
-          <div class="card-info">
+          <div class="card-head">
             <h3>Încărcător Fast Charge 25W</h3>
-            <div class="card-meta">
-              <span class="badge badge-nou">Nou</span>
-              <span class="meta-text">Cod ACC-0142</span>
-              <span class="meta-text">Accesorii</span>
-            </div>
-            <p class="card-desc">Încărcător rapid USB-C, potrivit pentru majoritatea telefoanelor Android și iPhone.</p>
-            <p class="card-note">Locație: raft B2</p>
-          </div>
-          <div class="card-side">
-            <span class="price">89 lei</span>
             <span class="status status-ok">În stoc</span>
-            <span class="qty">24 buc.</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-nou">Nou</span>
+            <span class="meta-text">Cod ACC-0142</span>
+            <span class="meta-text">Accesorii</span>
+          </div>
+          <p class="card-desc">Încărcător rapid USB-C, potrivit pentru majoritatea telefoanelor Android și iPhone.</p>
+          <div class="card-foot">
+            <p class="card-note">Locație: raft B2</p>
+            <div class="card-stock">
+              <span class="signal signal-4" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+              <span class="qty">24 buc.</span>
+              <span class="price">89 lei</span>
+            </div>
           </div>
         </li>
 
         <li class="item-card done">
-          <div class="card-info">
+          <div class="card-head">
             <h3>Display OLED Galaxy S21</h3>
-            <div class="card-meta">
-              <span class="badge badge-service">Service/Piese</span>
-              <span class="meta-text">Cod PIE-0317</span>
-              <span class="meta-text">Piese</span>
-            </div>
-            <p class="card-desc">Ecran de schimb pentru Galaxy S21, testat înainte de montaj. Se comandă din nou.</p>
-            <p class="card-note">Locație: raft D1</p>
-          </div>
-          <div class="card-side">
-            <span class="price">649 lei</span>
             <span class="status status-out">Epuizat</span>
-            <span class="qty">0 buc.</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-service">Service/Piese</span>
+            <span class="meta-text">Cod PIE-0317</span>
+            <span class="meta-text">Piese</span>
+          </div>
+          <p class="card-desc">Ecran de schimb pentru Galaxy S21, testat înainte de montaj. Se comandă din nou.</p>
+          <div class="card-foot">
+            <p class="card-note">Locație: raft D1</p>
+            <div class="card-stock">
+              <span class="signal signal-0" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+              <span class="qty">0 buc.</span>
+              <span class="price">649 lei</span>
+            </div>
           </div>
         </li>
 
         <li class="item-card">
-          <div class="card-info">
+          <div class="card-head">
             <h3>Husă Silicon iPhone 15 Pro</h3>
-            <div class="card-meta">
-              <span class="badge badge-refurbished">Refurbished</span>
-              <span class="meta-text">Cod ACC-0208</span>
-              <span class="meta-text">Accesorii</span>
-            </div>
-            <p class="card-desc">Husă flexibilă din silicon, verificată și igienizată înainte de a reveni pe raft.</p>
-            <p class="card-note">Locație: raft B4</p>
-          </div>
-          <div class="card-side">
-            <span class="price">39 lei</span>
             <span class="status status-ok">În stoc</span>
-            <span class="qty">3 buc.</span>
+          </div>
+          <div class="card-meta">
+            <span class="badge badge-refurbished">Refurbished</span>
+            <span class="meta-text">Cod ACC-0208</span>
+            <span class="meta-text">Accesorii</span>
+          </div>
+          <p class="card-desc">Husă flexibilă din silicon, verificată și igienizată înainte de a reveni pe raft.</p>
+          <div class="card-foot">
+            <p class="card-note">Locație: raft B4</p>
+            <div class="card-stock">
+              <span class="signal signal-1" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+              <span class="qty">3 buc.</span>
+              <span class="price">39 lei</span>
+            </div>
           </div>
         </li>
       </ul>
