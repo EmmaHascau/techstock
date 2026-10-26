@@ -4,22 +4,48 @@ const ETICHETE_CONDITIE = {
   service: "service"
 };
 
-export default function ProdusCard({ produs }) {
+export default function ProdusCard({ produs, onToggle, onDelete }) {
   return (
     <li className={produs.in_stock ? "item-card" : "item-card done"}>
       <div className="card-head">
-        <h3>{produs.denumire}</h3>
-        <span className={`badge badge-${produs.conditie}`}>
-          {ETICHETE_CONDITIE[produs.conditie] || produs.conditie}
-        </span>
-      </div>
-      
-      <div className="card-meta">
-        <span className="meta-text">Categorie: {produs.categorie}</span>
-        <span className="meta-text">Preț: {produs.pret} RON</span>
+        <label className="task-main" style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+          <input
+            type="checkbox"
+            checked={produs.in_stock}
+            onChange={() => onToggle(produs.id)}
+            style={{ width: "18px", height: "18px", cursor: "pointer" }}
+          />
+          <div>
+            <h3>{produs.denumire}</h3>
+            <div className="card-meta">
+              <span className={`badge badge-${produs.conditie}`}>
+                {ETICHETE_CONDITIE[produs.conditie] || produs.conditie}
+              </span>
+              <span className="meta-text">Categorie: {produs.categorie}</span>
+              <span className="meta-text">Preț: {produs.pret} RON</span>
+            </div>
+          </div>
+        </label>
+
+        <button
+          className="btn-danger"
+          onClick={() => onDelete(produs.id)}
+          aria-label={`Șterge ${produs.denumire}`}
+          style={{
+            border: "1px solid var(--accent)",
+            background: "transparent",
+            color: "var(--accent)",
+            borderRadius: "8px",
+            padding: "6px 12px",
+            font: "inherit",
+            cursor: "pointer"
+          }}
+        >
+          Șterge
+        </button>
       </div>
 
-      <div className="card-foot">
+      <div className="card-foot" style={{ marginTop: "14px" }}>
         <div className="card-stock">
           <span className="qty">Cantitate: {produs.cantitate} buc.</span>
         </div>

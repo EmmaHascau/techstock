@@ -1,6 +1,6 @@
 import ProdusCard from "./ProdusCard.jsx";
 
-export default function ProdusList({ produse }) {
+export default function ProdusList({ produse, onToggle, onDelete }) {
   if (!produse || produse.length === 0) {
     return <p className="empty">Nu există niciun produs în inventar.</p>;
   }
@@ -8,7 +8,12 @@ export default function ProdusList({ produse }) {
   return (
     <ul className="item-list">
       {produse.map((produs) => (
-        <ProdusCard key={produs.id} produs={produs} />
+        <ProdusCard 
+          key={produs.id} 
+          produs={produs} 
+          onToggle={onToggle} 
+          onDelete={onDelete} 
+        />
       ))}
     </ul>
   );

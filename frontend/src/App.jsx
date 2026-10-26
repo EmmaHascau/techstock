@@ -1,7 +1,8 @@
+import { useState } from "react";
 import ProdusList from "./components/ProdusList.jsx";
 import "./App.css";
 
-const produse = [
+const PRODUSE_INITIALE = [
   {
     id: 1,
     denumire: "Încărcător Fast Charge 25W",
@@ -31,17 +32,67 @@ const produse = [
   }
 ];
 
+function temaInitiala() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 export default function App() {
+  const [produse, setProduse] = useState(PRODUSE_INITIALE);
+  const [tema, setTema] = useState(temaInitiala);
+
+  function handleToggle(id) {
+    setProduse((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, in_stock: !p.in_stock } : p))
+    );
+  }
+
+  function handleDelete(id) {
+    setProduse((prev) => prev.filter((p) => p.id !== id));
+  }
+
+  function handleTema() {
+    const noua = tema === "dark" ? "light" : "dark";
+    setTema(noua);
+    document.documentElement.dataset.theme = noua;
+  }
+
   const inStoc = produse.filter((p) => p.in_stock).length;
 
   return (
     <>
       <header className="app-header">
+        <button
+          className="theme-toggle"
+          onClick={handleTema}
+          aria-pressed={tema === "dark"}
+        >
+          <span className="theme-icon-wrap">
+            {tema === "dark" ? (
+              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            ) : (
+              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            )}
+          </span>
+          <span className="theme-text">{tema === "dark" ? "Mod luminos" : "Mod întunecat"}</span>
+        </button>
+
         <div className="brand-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <rect x="9" y="9" width="6" height="6" />
-            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1v9h3M1v15h3M20 9h3M20 15h3" />
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+            <rect x="16" y="16" width="32" height="32" rx="4" />
+            <rect x="26" y="26" width="12" height="12" rx="2" />
+            <path d="M24 6v10M32 6v10M40 6v10M24 48v10M32 48v10M40 48v10M6 24h10M6 32h10M6 40h10M48 24h10M48 32h10M48 40h10" />
           </svg>
         </div>
         <h1>
@@ -96,7 +147,11 @@ export default function App() {
         <section className="panel panel-list">
           <h2>Inventar curent</h2>
           <p className="panel-hint">Fiecare produs are eticheta lui, cu prețul și nivelul de stoc ca barele de semnal ale unui telefon.</p>
-          <ProdusList produse={produse} />
+          <ProdusList 
+            produse={produse} 
+            onToggle={handleToggle} 
+            onDelete={handleDelete} 
+          />
         </section>
       </main>
 
