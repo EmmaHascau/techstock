@@ -870,3 +870,15 @@ ul {
 .theme-icon {
   animation: fadeInRotate 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
+.info { 
+  color: var(--muted); 
+}
+
+.error {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+}

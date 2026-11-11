@@ -1,44 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProdusList from "./components/ProdusList.jsx";
+import { fetchProduse } from "./api.js";
 import "./App.css";
-
-const PRODUSE_INITIALE = [
-  {
-    id: 1,
-    denumire: "Încărcător Fast Charge 25W",
-    conditie: "nou",
-    pret: 89,
-    cantitate: 24,
-    categorie: "Accesorii",
-    in_stock: true
-  },
-  {
-    id: 2,
-    denumire: "Display OLED Galaxy S21",
-    conditie: "service",
-    pret: 649,
-    cantitate: 0,
-    categorie: "Piese GSM",
-    in_stock: false
-  },
-  {
-    id: 3,
-    denumire: "Husă Silicon iPhone 15 Pro",
-    conditie: "refurbished",
-    pret: 39,
-    cantitate: 3,
-    categorie: "Accesorii",
-    in_stock: true
-  }
-];
 
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export default function App() {
-  const [produse, setProduse] = useState(PRODUSE_INITIALE);
+  const [produse, setProduse] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [tema, setTema] = useState(temaInitiala);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function load() {
+      try {
+        const data = await fetchProduse();
+        if (!ignore) {
+          setProduse(data);
+        }
+      } catch (err) {
+        if (!ignore) {
+          setError(err.message);
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    load();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   function handleToggle(id) {
     setProduse((prev) =>
@@ -147,11 +147,22 @@ export default function App() {
         <section className="panel panel-list">
           <h2>Inventar curent</h2>
           <p className="panel-hint">Fiecare produs are eticheta lui, cu prețul și nivelul de stoc ca barele de semnal ale unui telefon.</p>
-          <ProdusList 
-            produse={produse} 
-            onToggle={handleToggle} 
-            onDelete={handleDelete} 
-          />
+          
+          {loading && <p className="info">Se încarcă...</p>}
+          
+          {error && (
+            <p className="error">
+              Nu am putut încărca datele: {error}. Rulează <code>npm run api</code>?
+            </p>
+          )}
+
+          {!loading && !error && (
+            <ProdusList 
+              produse={produse} 
+              onToggle={handleToggle} 
+              onDelete={handleDelete} 
+            />
+          )}
         </section>
       </main>
 
