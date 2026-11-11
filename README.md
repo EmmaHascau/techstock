@@ -43,12 +43,21 @@ The list is rendered from data through two components:
 - **Theme Switcher:** Light and dark mode support with system preference detection (`prefers-color-scheme`) and manual toggle via a minimalist SVG-animated button in the header.
 - **Warm Aesthetic:** Unified brown and cream color palette without harsh accents, coupled with refined circuit trace animations in the header.
 
+## Stage 6: data from a mock API
+The inventory list is served by `json-server` from `db.json` and loaded asynchronously on component mount using `useEffect`. The app handles loading, success, and error states gracefully, using an environment variable for the API URL.
+
+**How to run:**
+- Terminal 1 (API): `npm run api` (runs on `http://localhost:3001`)
+- Terminal 2 (React): `npm run dev` (runs on `http://localhost:5173`)
+
 ## Status
 - [x] Stage 1: static mockup
 - [x] Stage 2: data logic in JavaScript
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: components rendered from data
 - [x] Stage 5: local state, events, and theme switcher
+- [x] Stage 6: data from a mock API
+- [ ] Stage 7: form and validation
 
 ## Verification table
 
@@ -87,3 +96,10 @@ The list is rendered from data through two components:
 | S5-R2 | light and dark mode with SVG toggle | [App.jsx](https://github.com/EmmaHascau/techstock/blob/0f483c8/frontend/src/App.jsx) | click theme button |
 | S5-R3 | README Stage 5 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/0f483c8/README.md), [ai-log/etapa-05.md](https://github.com/EmmaHascau/techstock/blob/0f483c8/ai-log/etapa-05.md) | read |
 | S5-R4 | commit "Stage 5" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commits/main) | commit history |
+| S6-R1 | `npm run api` starts, route shows JSON | [package.json](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/package.json), [db.json](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/db.json) | open `localhost:3001/produse` |
+| S6-R2 | Data no longer hardcoded in React | [App.jsx](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/src/App.jsx) | read |
+| S6-R3 | Loading message while waiting | [App.jsx](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/src/App.jsx) | check `loading` state |
+| S6-R4 | Error message when API is down | [App.jsx](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/src/App.jsx) | stop `npm run api`, refresh |
+| S6-R5 | Fetch only in `api.js`, URL from env | [api.js](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/src/api.js), [.env.example](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/.env.example) | search for `fetch` |
+| S6-R6 | README Stage 6 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/5fc19fe/README.md), [ai-log/etapa-06.md](https://github.com/EmmaHascau/techstock/blob/5fc19fe/ai-log/etapa-06.md) | read |
+| S6-R7 | Commit "Stage 6" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commit/5fc19fe) | commit history |
