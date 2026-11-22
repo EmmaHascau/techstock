@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import ProdusList from "./components/ProdusList.jsx";
-import { fetchProduse } from "./api.js";
+import ProdusForm from "./components/ProdusForm.jsx";
+import { fetchProduse, createProdus, updateProdus, deleteProdus } from "./api.js";
 import "./App.css";
+
+const TRACE_FAINT = "M0 36 " + "h200 l24 -10 h120 l24 10 h32 ".repeat(6);
+const TRACE_LINE = "M0 30 " + "h110 l24 -12 h140 l24 12 h102 ".repeat(6);
 
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -12,6 +16,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tema, setTema] = useState(temaInitiala);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = tema;
+  }, [tema]);
 
   useEffect(() => {
     let ignore = false;
@@ -40,35 +48,52 @@ export default function App() {
     };
   }, []);
 
-  function handleToggle(id) {
-    setProduse((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, in_stock: !p.in_stock } : p))
-    );
+  async function handleAdd(produsNou) {
+    const creat = await createProdus(produsNou);
+    setProduse((prev) => [...prev, creat]);
+    setError(null);
   }
 
-  function handleDelete(id) {
-    setProduse((prev) => prev.filter((p) => p.id !== id));
+  async function handleToggle(id) {
+    const produs = produse.find((p) => p.id === id);
+    try {
+      const actualizat = await updateProdus(id, { in_stock: !produs.in_stock });
+      setProduse((prev) => prev.map((p) => (p.id === id ? actualizat : p)));
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      await deleteProdus(id);
+      setProduse((prev) => prev.filter((p) => p.id !== id));
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
   function handleTema() {
-    const noua = tema === "dark" ? "light" : "dark";
-    setTema(noua);
-    document.documentElement.dataset.theme = noua;
+    setTema((curenta) => (curenta === "dark" ? "light" : "dark"));
   }
 
   const inStoc = produse.filter((p) => p.in_stock).length;
+  const arataLista = !loading && !(error && produse.length === 0);
 
   return (
     <>
       <header className="app-header">
         <button
+          type="button"
           className="theme-toggle"
           onClick={handleTema}
           aria-pressed={tema === "dark"}
         >
           <span className="theme-icon-wrap">
             {tema === "dark" ? (
-              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
                 <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -80,7 +105,7 @@ export default function App() {
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
               </svg>
             ) : (
-              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>
             )}
@@ -88,13 +113,11 @@ export default function App() {
           <span className="theme-text">{tema === "dark" ? "Mod luminos" : "Mod întunecat"}</span>
         </button>
 
-        <div className="brand-icon">
-          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-            <rect x="16" y="16" width="32" height="32" rx="4" />
-            <rect x="26" y="26" width="12" height="12" rx="2" />
-            <path d="M24 6v10M32 6v10M40 6v10M24 48v10M32 48v10M40 48v10M6 24h10M6 32h10M6 40h10M48 24h10M48 32h10M48 40h10" />
-          </svg>
-        </div>
+        <svg className="brand-icon" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
+          <rect x="16" y="16" width="32" height="32" rx="4" />
+          <rect x="26" y="26" width="12" height="12" rx="2" />
+          <path d="M24 6v10M32 6v10M40 6v10M24 48v10M32 48v10M40 48v10M6 24h10M6 32h10M6 40h10M48 24h10M48 32h10M48 40h10" />
+        </svg>
         <h1>
           Tech<span className="outline">Stock</span>
         </h1>
@@ -102,73 +125,50 @@ export default function App() {
         <p className="app-count">
           {produse.length} produse, dintre care {inStoc} în stoc
         </p>
-        <svg className="header-trace" width="1000" height="40" viewBox="0 0 1000 40">
-          <path className="trace-faint" d="M0 20h350l30-15h270l30 15h320" />
-          <path className="trace-line" d="M100 20h300l20-10h280l20 10h280" />
-          <path className="trace-pulse" d="M100 20h300l20-10h280l20 10h280" />
+
+        <svg className="header-trace" width="2400" height="40" viewBox="0 0 2400 40" aria-hidden="true">
+          <path className="trace-faint" d={TRACE_FAINT} />
+          <path className="trace-line" d={TRACE_LINE} />
+          <path className="trace-pulse" pathLength="1000" d={TRACE_LINE} />
         </svg>
       </header>
 
       <main className="container">
-        <section className="panel panel-form">
-          <h2>Adaugă produs</h2>
+        <section className="panel panel-form" aria-labelledby="titlu-formular">
+          <h2 id="titlu-formular">Adaugă produs</h2>
           <p className="panel-hint">Completează fișa și produsul intră în inventar.</p>
-          
-          <div className="item-form">
-            <label>
-              Denumire produs
-              <input type="text" placeholder="Ex: Încărcător Fast Charge 25W" defaultValue="" />
-            </label>
-
-            <label>
-              Condiție produs
-              <select defaultValue="Nou">
-                <option value="Nou">Nou</option>
-                <option value="Refurbished">Refurbished</option>
-                <option value="Service/Piese">Service/Piese</option>
-              </select>
-            </label>
-
-            <div className="form-row">
-              <label>
-                Preț (lei)
-                <input type="number" defaultValue="89" />
-              </label>
-              <label>
-                Bucăți
-                <input type="number" defaultValue="12" />
-              </label>
-            </div>
-
-            <button type="button">Adaugă în inventar</button>
-          </div>
+          <ProdusForm onAdd={handleAdd} />
         </section>
 
-        <section className="panel panel-list">
-          <h2>Inventar curent</h2>
-          <p className="panel-hint">Fiecare produs are eticheta lui, cu prețul și nivelul de stoc ca barele de semnal ale unui telefon.</p>
-          
-          {loading && <p className="info">Se încarcă...</p>}
-          
-          {error && (
-            <p className="error">
-              Nu am putut încărca datele: {error}. Rulează <code>npm run api</code>?
+        <section className="panel panel-list" aria-labelledby="titlu-lista">
+          <h2 id="titlu-lista">Inventar curent</h2>
+          <p className="panel-hint">
+            Fiecare produs are eticheta lui, cu prețul și nivelul de stoc ca barele de semnal ale unui telefon.
+          </p>
+
+          {loading && (
+            <p className="info" data-testid="loading">
+              Se încarcă...
             </p>
           )}
 
-          {!loading && !error && (
-            <ProdusList 
-              produse={produse} 
-              onToggle={handleToggle} 
-              onDelete={handleDelete} 
+          {error && (
+            <p className="error" data-testid="error">
+              {error}
+            </p>
+          )}
+
+          {arataLista && (
+            <ProdusList
+              produse={produse}
+              onToggle={handleToggle}
+              onDelete={handleDelete}
             />
           )}
         </section>
       </main>
 
-      <footer className="app-footer">
-        <p>TechStock - Gestionare inventar GSM</p>
-      </footer>
+      <footer className="app-footer">Proiect Tehnologii Web</footer>
     </>
   );
 }

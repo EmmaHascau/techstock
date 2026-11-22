@@ -1,0 +1,11 @@
+{
+  "resource": "produse",
+  "title": "denumire",
+  "done": "in_stock",
+  "sample": {
+    "conditie": "nou",
+    "pret": 99,
+    "cantitate": 5,
+    "categorie": "Accesorii"
+  }
+}

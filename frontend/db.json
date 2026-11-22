@@ -1,14 +1,5 @@
-﻿{
+{
   "produse": [
-    {
-      "id": 1,
-      "denumire": "Încărcător Fast Charge 25W",
-      "conditie": "nou",
-      "pret": 89,
-      "cantitate": 24,
-      "categorie": "Accesorii",
-      "in_stock": true
-    },
     {
       "id": 2,
       "denumire": "Display OLED Galaxy S21",
@@ -34,15 +25,6 @@
       "pret": 180,
       "cantitate": 10,
       "categorie": "Piese GSM",
-      "in_stock": true
-    },
-    {
-      "id": 5,
-      "denumire": "Folie Sticlă Securizată Xiaomi",
-      "conditie": "nou",
-      "pret": 25,
-      "cantitate": 15,
-      "categorie": "Accesorii",
       "in_stock": true
     }
   ]
