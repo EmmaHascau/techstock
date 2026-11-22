@@ -50,6 +50,9 @@ The inventory list is served by `json-server` from `db.json` and loaded asynchro
 - Terminal 1 (API): `npm run api` (runs on `http://localhost:3001`)
 - Terminal 2 (React): `npm run dev` (runs on `http://localhost:5173`)
 
+## Stage 7: form and validation
+Controlled form (`ProdusForm`) with local validation, full CRUD operations via `api.js`, `data-testid` attributes, and root configuration in `tw.json`.
+
 ## Status
 - [x] Stage 1: static mockup
 - [x] Stage 2: data logic in JavaScript
@@ -57,7 +60,7 @@ The inventory list is served by `json-server` from `db.json` and loaded asynchro
 - [x] Stage 4: components rendered from data
 - [x] Stage 5: local state, events, and theme switcher
 - [x] Stage 6: data from a mock API
-- [ ] Stage 7: form and validation
+- [x] Stage 7: form and validation
 
 ## Verification table
 
@@ -103,3 +106,8 @@ The inventory list is served by `json-server` from `db.json` and loaded asynchro
 | S6-R5 | Fetch only in `api.js`, URL from env | [api.js](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/src/api.js), [.env.example](https://github.com/EmmaHascau/techstock/blob/5fc19fe/frontend/.env.example) | search for `fetch` |
 | S6-R6 | README Stage 6 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/5fc19fe/README.md), [ai-log/etapa-06.md](https://github.com/EmmaHascau/techstock/blob/5fc19fe/ai-log/etapa-06.md) | read |
 | S6-R7 | Commit "Stage 6" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commit/5fc19fe) | commit history |
+| S7-R1 | Controlled form with local validation & `data-testid` | [ProdusForm.jsx](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/frontend/src/components/ProdusForm.jsx) | submit invalid / valid form |
+| S7-R2 | CRUD operations (`POST`, `PATCH`, `DELETE`) in `api.js` | [api.js](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/frontend/src/api.js) | add, toggle, delete item |
+| S7-R3 | Root config file `tw.json` present | [tw.json](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/tw.json) | read |
+| S7-R4 | README Stage 7 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/README.md), [ai-log/etapa-07.md](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/ai-log/etapa-07.md) | read |
+| S7-R5 | Commit "Stage 7" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commit/b2fdf1b) | commit history |
