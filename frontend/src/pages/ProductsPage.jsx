@@ -82,11 +82,10 @@ export default function ProductsPage() {
     const product = products.find((p) => p.id === id);
     if (!product) return;
     const quantity = Math.max(0, product.quantity + delta);
-    const changes = { quantity };
-    if (quantity === 0 && product.in_stock) {
-      changes.in_stock = false;
-    }
-    await saveChanges(id, changes);
+    await saveChanges(id, {
+      quantity,
+      in_stock: quantity > 0,
+    });
   }
 
   async function handleDelete(id) {
