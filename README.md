@@ -22,7 +22,7 @@ Sample data used across all stages:
 
 | Tool | Used for |
 | :--- | :--- |
-| Gemini | Assisting with documentation drafting, data logic architecture, immutability implementation, component splitting, props management, and state/theme toggling logic |
+| Gemini | Assisting with documentation drafting, data logic architecture, immutability implementation, component splitting, props management, state/theme toggling logic, routing setup, and CSS Modules refactoring |
 | Claude | Brainstorming aesthetic themes, typography pairings (Fraunces & Figtree), and color token design for CSS |
 
 Details per stage: see the ai-log/ folder.
@@ -53,6 +53,9 @@ The inventory list is served by `json-server` from `db.json` and loaded asynchro
 ## Stage 7: form and validation
 Controlled form (`ProdusForm`) with local validation, full CRUD operations via `api.js`, `data-testid` attributes, and root configuration in `tw.json`.
 
+## Stage 8: routing and detail page
+Multi-page SPA built with `react-router-dom` (`BrowserRouter`, `Routes`, `Layout` with `Outlet`, `NavLink`, `useParams`), dedicated pages (`ProductsPage`, `ProductDetailPage`, `AboutPage`, `NotFoundPage`), shared constants in `constants.js`, single-item fetch in `api.js`, and component/page styles split into `index.css` and CSS Modules (`*.module.css`).
+
 ## Status
 - [x] Stage 1: static mockup
 - [x] Stage 2: data logic in JavaScript
@@ -61,6 +64,7 @@ Controlled form (`ProdusForm`) with local validation, full CRUD operations via `
 - [x] Stage 5: local state, events, and theme switcher
 - [x] Stage 6: data from a mock API
 - [x] Stage 7: form and validation
+- [x] Stage 8: routing and detail page
 
 ## Verification table
 
@@ -111,3 +115,11 @@ Controlled form (`ProdusForm`) with local validation, full CRUD operations via `
 | S7-R3 | Root config file `tw.json` present | [tw.json](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/tw.json) | read |
 | S7-R4 | README Stage 7 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/README.md), [ai-log/etapa-07.md](https://github.com/EmmaHascau/techstock/blob/b2fdf1b/ai-log/etapa-07.md) | read |
 | S7-R5 | Commit "Stage 7" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commit/b2fdf1b) | commit history |
+| S8-R1 | Router & routes configured (`/`, `/produse/:id`, `/despre`, `*`) | [main.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/main.jsx), [App.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/App.jsx) | navigate across routes |
+| S8-R2 | Shared layout with `NavLink` and `Outlet` | [Layout.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/components/Layout.jsx) | check `nav` & switch pages |
+| S8-R3 | Detail page fetches item & handles missing ID | [ProductDetailPage.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/pages/ProductDetailPage.jsx), [api.js](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/api.js) | open `/produse/1` & `/produse/999` |
+| S8-R4 | About and 404 (`not-found`) pages implemented | [AboutPage.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/pages/AboutPage.jsx), [NotFoundPage.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/pages/NotFoundPage.jsx) | open `/despre` & `/unknown` |
+| S8-R5 | Card title uses `Link` (`item-link`) & constants extracted | [ProductCard.jsx](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/components/ProductCard.jsx), [constants.js](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/constants.js) | click card title link |
+| S8-R6 | Styles split into `index.css` and CSS Modules | [index.css](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/index.css), [ProductsPage.module.css](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/frontend/src/pages/ProductsPage.module.css) | inspect styles & build |
+| S8-R7 | README Stage 8 section + AI log | [README.md](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/README.md), [ai-log/etapa-08.md](https://github.com/EmmaHascau/techstock/blob/2f736b18476bd46f25dbf02761d470d2a1f58720/ai-log/etapa-08.md) | read |
+| S8-R8 | Commit "Stage 8: routing and detail page" pushed | [Commit history](https://github.com/EmmaHascau/techstock/commit/2f736b18476bd46f25dbf02761d470d2a1f58720) | commit history |
