@@ -33,6 +33,9 @@ Navigate to the `frontend/` folder, install dependencies (`npm install`), and ru
 ## Stage 2: data logic
 Plain JavaScript, no DOM. produse.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
 
+## Stage 3: Vite and React project
+The static mockup was migrated to a React + Vite project inside `frontend/`, moving the HTML layout into JSX and rendering the initial product list from `App.jsx` with the same visual design.
+
 ## Stage 4: components
 The list is rendered from data through two components:
 - `ProdusList` receives the whole array and renders one card per item (or an empty state message if the list is empty).
