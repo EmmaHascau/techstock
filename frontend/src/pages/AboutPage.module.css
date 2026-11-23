@@ -1,0 +1,20 @@
+.text {
+  max-width: 62ch;
+  margin-bottom: 14px;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.chip {
+  padding: 6px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  background: var(--card);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

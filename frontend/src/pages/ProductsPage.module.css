@@ -1,0 +1,58 @@
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 currentColor; }
+  70%  { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.formPanel {
+  position: sticky;
+  top: 112px;
+}
+
+.listPanel {
+  animation-delay: 0.25s;
+}
+
+.summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 5px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.summary::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-brown);
+  color: var(--c-brown);
+  animation: ping 2.2s ease-out infinite;
+}
+
+.summary strong {
+  color: var(--text);
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .formPanel {
+    position: static;
+  }
+}

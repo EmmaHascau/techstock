@@ -1,0 +1,94 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back:hover {
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+.detail .title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.done {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 16px 32px;
+  margin: 0;
+  padding-top: 8px;
+}
+
+.fields dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fields dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.stockRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bigPrice {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.description {
+  max-width: 62ch;
+  padding: 14px 18px;
+  border-left: 3px solid var(--c-brown);
+  background: var(--note-bg);
+  border-radius: 0 8px 8px 0;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.noDescription {
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (max-width: 560px) {
+  .fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .fields dd {
+    margin-bottom: 14px;
+  }
+}

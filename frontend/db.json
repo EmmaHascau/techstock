@@ -1,31 +1,59 @@
 {
-  "produse": [
+  "products": [
+    {
+      "id": 1,
+      "name": "Fast Charge 25W Charger",
+      "in_stock": true,
+      "condition": "new",
+      "price": 89,
+      "quantity": 1,
+      "category": "Accessories",
+      "description": "USB-C wall charger with 25W fast charging. Compatible with most recent Android phones and iPhones.",
+      "added_at": "2026-09-14T09:30:00.000Z"
+    },
     {
       "id": 2,
-      "denumire": "Display OLED Galaxy S21",
-      "conditie": "service",
-      "pret": 649,
-      "cantitate": 0,
-      "categorie": "Piese GSM",
-      "in_stock": false
+      "name": "Galaxy S21 OLED Display",
+      "in_stock": false,
+      "condition": "service",
+      "price": 649,
+      "quantity": 0,
+      "category": "Phone Parts",
+      "description": "Replacement OLED screen assembly for Samsung Galaxy S21. Sold out, next delivery expected in two weeks.",
+      "added_at": "2026-09-21T11:05:00.000Z"
     },
     {
       "id": 3,
-      "denumire": "Husă Silicon iPhone 15 Pro",
-      "conditie": "refurbished",
-      "pret": 39,
-      "cantitate": 3,
-      "categorie": "Accesorii",
-      "in_stock": true
+      "name": "iPhone 15 Pro Silicone Case",
+      "in_stock": true,
+      "condition": "refurbished",
+      "price": 39,
+      "quantity": 1,
+      "category": "Accessories",
+      "description": "Inspected and cleaned silicone case, returned unused. Minor packaging wear.",
+      "added_at": "2026-10-02T14:20:00.000Z"
     },
     {
       "id": 4,
-      "denumire": "Acumulator Original iPhone 13",
-      "conditie": "nou",
-      "pret": 180,
-      "cantitate": 10,
-      "categorie": "Piese GSM",
-      "in_stock": true
+      "name": "iPhone 13 Original Battery",
+      "in_stock": true,
+      "condition": "new",
+      "price": 180,
+      "quantity": 10,
+      "category": "Phone Parts",
+      "description": "Original replacement battery for iPhone 13, with adhesive strips included.",
+      "added_at": "2026-10-11T08:45:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Xiaomi Tempered Glass Protector",
+      "in_stock": true,
+      "condition": "new",
+      "price": 25,
+      "quantity": 15,
+      "category": "Accessories",
+      "description": "9H tempered glass screen protector, easy-install frame included.",
+      "added_at": "2026-10-19T16:10:00.000Z"
     }
   ]
 }
